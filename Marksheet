@@ -1,0 +1,74 @@
+# Marksheet Program - AIC035346
+# Sunday 12:15 - 03:15 (10:15 - 12:15)
+
+# Initializing Lists
+subject = []
+marks = []
+total = []
+status = []
+
+# Taking input from the user for the number of subjects
+num_of_sub = int(input("Please enter the number of subjects for which you want to calculate the grade: \n"))
+
+# Taking input from the user for subject name and marks
+for j in range(num_of_sub):
+    sub = input("Please enter the subject name: ")
+    subject.append(sub)
+    tot = int(input("Please enter the subject total marks: "))
+    total.append(tot)
+    mar = int(input("Please enter the subject marks: "))
+
+    # Checking the marks obtained should be a valid value     
+    # Assuming that the user should enter integer values
+    flag = True
+    while flag:
+        if mar >= 0 and mar <= tot:
+            flag = False
+        else:
+            mar = int(input("Please enter the subject marks in the range of 0-100: "))
+            continue
+    marks.append(mar)
+    stat = (mar / tot) * 100
+    #print(stat)
+    if stat >= 60:
+        status.append("Pass")
+    else:
+        status.append("Fail")
+print("\n\n")
+print("\t\t\t\tMARKSHEET")
+print("\t\t\t\t=========")
+print("\n\n")
+print("SUBJECT NAME\t\tTOTAL MARKS\t\t OBTAINED MARKS\t\tSTATUS\n")
+
+# Printing the input values taken from the user
+for i in range(len(subject)):
+    length = len(subject[i])
+    if length >= 15:
+        print(subject[i].title(),'\t',total[i],'\t\t\t\t',marks[i],'\t\t',status[i])    
+    elif length >= 7:
+        print(subject[i].title(),'\t\t',total[i],'\t\t\t\t',marks[i],'\t\t',status[i])
+    elif length < 7:
+        print(subject[i].title(),'\t\t\t',total[i],'\t\t\t\t',marks[i],'\t\t',status[i])
+
+# Calculating Percentage
+total_marks = sum(total)
+total_obt_marks = sum(marks)
+perc = int((total_obt_marks / total_marks) * 100)
+print("\nThe total marks are: " + str(total_marks))
+print("\nThe total marks obtained is: " + str(total_obt_marks))
+print("\nThe obtained percentage is: " + str(perc) + "%.")
+
+# Checking the Grade
+if "Fail" in status:
+    print("\nYou are Fail")
+else:
+    if perc >= 90:
+        print("\nGreat! You have achieved A+ grade.")
+    elif perc >= 80:
+        print("\nGood! You have got A grade.")
+    elif perc >= 70:
+        print("\nYou have got B grade.")
+    elif perc >= 60:
+        print("\nYou have got C grade.")
+    else:
+        print("\nAlas! You are Fail.")
